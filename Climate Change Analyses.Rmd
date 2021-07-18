@@ -1,0 +1,1313 @@
+---
+title: "Climate Change Analyses"
+author: "Akhil Kokkula"
+date: "1/16/2021"
+output: html_notebook
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(speff2trial)
+library(olsrr)
+library(knitr)
+library(tidyverse)
+library(janitor)
+library(shiny)
+library(viridis)
+library(ggpmisc)
+
+
+setwd("~/Google Drive/Science Research Capstone - Akhil Kokkula")
+```
+
+```{r, read_my.data, message = F, echo = F}
+tempData <- read_csv("HartfordTemps.csv")
+
+ozoneData2010 <- read_csv("ad_viz_plotval_data2010.csv", 
+      col_types = cols(AQS_PARAMETER_CODE = col_character(), 
+          STATE_CODE = col_character()))
+ozoneData2010 <- dplyr::rename(ozoneData2010, Site_Name = "Site Name")
+ozoneData2010 <- dplyr::filter(ozoneData2010, Site_Name == "McAuliffe Park")
+
+ozoneData2011 <- read_csv("ad_viz_plotval_data2011.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2011 <- rename(ozoneData2011, "Site_Name" = "Site Name")
+ozoneData2011 <- filter(ozoneData2011, Site_Name == "McAuliffe Park")
+
+ozoneData2012 <- read_csv("ad_viz_plotval_data2012.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2012 <- rename(ozoneData2012, "Site_Name" = "Site Name")
+ozoneData2012 <- filter(ozoneData2012, Site_Name == "McAuliffe Park")
+
+ozoneData2013 <- read_csv("ad_viz_plotval_data2013.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2013 <- rename(ozoneData2013, "Site_Name" = "Site Name")
+ozoneData2013 <- filter(ozoneData2013, Site_Name == "McAuliffe Park")
+
+ozoneData2014 <- read_csv("ad_viz_plotval_data2014.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2014 <- rename(ozoneData2014, "Site_Name" = "Site Name")
+ozoneData2014 <- filter(ozoneData2014, Site_Name == "McAuliffe Park")
+
+ozoneData2015 <- read_csv("ad_viz_plotval_data2015.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2015 <- rename(ozoneData2015, "Site_Name" = "Site Name")
+ozoneData2015 <- filter(ozoneData2015, Site_Name == "McAuliffe Park")
+
+ozoneData2016 <- read_csv("ad_viz_plotval_data2016.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2016 <- rename(ozoneData2016, "Site_Name" = "Site Name")
+ozoneData2016 <- filter(ozoneData2016, Site_Name == "McAuliffe Park")
+
+ozoneData2017 <- read_csv("ad_viz_plotval_data2017.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2017 <- rename(ozoneData2017, "Site_Name" = "Site Name")
+ozoneData2017 <- filter(ozoneData2017, Site_Name == "McAuliffe Park")
+
+ozoneData2018 <- read_csv("ad_viz_plotval_data2018.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2018 <- rename(ozoneData2018, "Site_Name" = "Site Name")
+ozoneData2018 <- filter(ozoneData2018, Site_Name == "McAuliffe Park")
+
+ozoneData2019 <- read_csv("ad_viz_plotval_data2019.csv", 
+        col_types = cols(AQS_PARAMETER_CODE = col_character(),
+          STATE_CODE = col_character()))
+ozoneData2019 <- rename(ozoneData2019, "Site_Name" = "Site Name")
+ozoneData2019 <- filter(ozoneData2019, Site_Name == "McAuliffe Park")
+
+pmData2010 <- read_csv("ad_viz_plotvalpm_data2010.csv")
+pmData2010 <- rename(pmData2010, "Site_Name" = "Site Name")
+pmData2010 <- filter(pmData2010, Site_Name == "McAuliffe Park")
+
+pmData2011 <- read_csv("ad_viz_plotvalpm_data2011.csv")
+pmData2011 <- rename(pmData2011, "Site_Name" = "Site Name")
+pmData2011 <- filter(pmData2011, Site_Name == "McAuliffe Park")
+
+pmData2012 <- read_csv("ad_viz_plotvalpm_data2012.csv")
+pmData2012 <- rename(pmData2012, "Site_Name" = "Site Name")
+pmData2012 <- filter(pmData2012, Site_Name == "McAuliffe Park")
+
+pmData2013 <- read_csv("ad_viz_plotvalpm_data2013.csv")
+pmData2013 <- rename(pmData2013, "Site_Name" = "Site Name")
+pmData2013 <- filter(pmData2013, Site_Name == "McAuliffe Park")
+
+pmData2014 <- read_csv("ad_viz_plotvalpm_data2014.csv")
+pmData2014 <- rename(pmData2014, "Site_Name" = "Site Name")
+pmData2014 <- filter(pmData2014, Site_Name == "McAuliffe Park")
+
+pmData2015 <- read_csv("ad_viz_plotvalpm_data2015.csv")
+pmData2015 <- rename(pmData2015, "Site_Name" = "Site Name")
+pmData2015 <- filter(pmData2015, Site_Name == "McAuliffe Park")
+
+pmData2016 <- read_csv("ad_viz_plotvalpm_data2016.csv")
+pmData2016 <- rename(pmData2016, "Site_Name" = "Site Name")
+pmData2016 <- filter(pmData2016, Site_Name == "McAuliffe Park")
+
+pmData2017 <- read_csv("ad_viz_plotvalpm_data2017.csv")
+pmData2017 <- rename(pmData2017, "Site_Name" = "Site Name")
+pmData2017 <- filter(pmData2017, Site_Name == "McAuliffe Park")
+
+pmData2018 <- read_csv("ad_viz_plotvalpm_data2018.csv")
+pmData2018 <- rename(pmData2018, "Site_Name" = "Site Name")
+pmData2018 <- filter(pmData2018, Site_Name == "McAuliffe Park")
+
+pmData2019 <- read_csv("ad_viz_plotvalpm_data2019.csv")
+pmData2019 <- rename(pmData2019, "Site_Name" = "Site Name")
+pmData2019 <- filter(pmData2019, Site_Name == "McAuliffe Park")
+
+```
+
+```{r}
+ozoneData <- bind_rows(ozoneData2010, ozoneData2011, ozoneData2012, ozoneData2013, ozoneData2014, ozoneData2015, ozoneData2016, ozoneData2017, ozoneData2018, ozoneData2019)
+
+ozoneData <- ozoneData %>%
+  mutate(month = as.numeric(str_sub(ozoneData$Date, start=1, end=2)), 
+         day = as.numeric(str_sub(ozoneData$Date, start=4, end=5)), 
+         year = as.numeric(str_sub(ozoneData$Date, start=7, end=10)))
+
+pmData <- bind_rows(pmData2010, pmData2011, pmData2012, pmData2013, pmData2014, pmData2015, pmData2016, pmData2017, pmData2018, pmData2019)
+
+pmData <- pmData %>%
+  mutate(month = as.numeric(str_sub(pmData$Date, start=1, end=2)), 
+         day = as.numeric(str_sub(pmData$Date, start=4, end=5)), 
+         year = as.numeric(str_sub(pmData$Date, start=7, end=10)))
+
+ozoneData <- ozoneData %>% rename(ozone = "Daily Max 8-hour Ozone Concentration")
+pmData <- pmData %>% rename(pm = "Daily Mean PM2.5 Concentration")
+
+
+
+
+tempData <- tempData %>%
+  mutate(year = as.numeric(str_sub(tempData$DATE, start=1, end=4)), 
+         month = as.numeric(str_sub(tempData$DATE, start=6, end=7)),
+         day = as.numeric(str_sub(tempData$DATE, start=9, end=10)))
+```
+
+
+```{r, eval = F}
+head(tempData)
+summary(tempData)
+names(tempData)
+str(tempData)
+Na <- is.na(tempData)
+sum(Na)
+Na <- is.na(ozoneData)
+sum(Na)
+Na <- is.na(pmData)
+sum(Na)
+```
+
+```{r}
+#trends in temps for each year 
+Na <- is.na(tempBasic)
+sum(Na) #23
+tempBasic <- na.omit(tempBasic)
+Na <- is.na(tempBasic)
+sum(Na)
+tempBasic %>%
+  group_by(year) %>%
+  summarise(mean = mean(TMAX),
+            median = median(TMAX),
+            range = max(TMAX) - min(TMAX), 
+            Standard_Deviation = sd(TMAX),
+            Inter_Quartile_Range = IQR(TMIN)) %>%
+  knitr::kable()
+
+
+tempBasic %>%
+  group_by(year) %>%
+  summarise(mean = mean(TMIN),
+            median = median(TMIN),
+            range = max(TMIN) - min(TMIN), 
+            Standard_Deviation = sd(TMIN),
+            Inter_Quartile_Range = IQR(TMIN)) %>%
+  knitr::kable()
+
+
+ggplot(tempBasic, aes(x = as.character(year), y = TMAX, fill = as.character(year))) + geom_boxplot() + stat_summary(fun = mean, geom = "point")
+
+  
+ggplot(tempBasic, aes(x = TMAX)) + geom_histogram()
+
+
+ggplot(tempBasic, aes(x = as.character(year), y = TMIN, fill = as.character(year))) + geom_boxplot() + stat_summary(fun = mean, geom = "point") 
+
+ggplot(tempBasic, aes(x = TMIN)) + geom_histogram()
+
+
+#only spring and summer months (March-August)
+
+tempsFiltered <- filter(tempBasic, month >= 3, month <= 8)
+
+tempsFiltered %>%
+  group_by(year) %>%
+  summarise(mean = mean(TMAX),
+            median = median(TMAX),
+            range = max(TMAX) - min(TMAX),
+            Standard_Deviation = sd(TMAX),
+            Inter_Quartile_Range = IQR(TMAX)) %>%
+  knitr::kable()
+
+ggplot(tempsFiltered, aes(x = as.character(year), y = TMAX, fill = as.character(year))) + geom_boxplot() + stat_summary(fun = mean, geom = "point")
+
+tempsFiltered %>%
+  group_by(year) %>%
+  summarise(mean = mean(TMIN),
+            median = median(TMIN),
+            range = max(TMIN) - min(TMIN),
+            Standard_Deviation = sd(TMIN),
+            Inter_Quartile_Range = IQR(TMIN)) %>%
+  knitr::kable()
+
+ggplot(tempsFiltered, aes(x = as.character(year), y = TMIN, fill = as.character(year))) + geom_boxplot() + stat_summary(fun = mean, geom = "point")
+
+
+#above a certain threshold temperature (90)
+
+tempsHighMAX <- filter(tempBasic, TMAX >= 90)
+
+tempsHigh %>%
+  group_by(year) %>%
+  summarise(count = n()) %>%
+  knitr::kable()
+
+ggplot(tempsHighMAX, aes(x = as.character(year))) + geom_bar()
+
+#temp v. ozone
+
+ozoneData <- filter(ozoneData, PERCENT_COMPLETE >= 75)
+ozoneBasic <- select(ozoneData, year, month, day, ozone, DAILY_AQI_VALUE, Site_Name)
+Na <- is.na(ozoneBasic)
+sum(Na)
+tempBasic <- select(tempData, year, month, day, TMAX, TMIN)
+tempOzone <- full_join(ozoneBasic, tempBasic, by = c("month", "day", "year"))
+
+tempOzone2010Unfiltered <- filter(tempOzone, year == 2010)
+tempOzone2010 <- drop_na(tempOzone2010Unfiltered)
+tempOzoneAvg2010 <- tempOzone2010 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2010$year <- "2010"
+
+  
+
+
+tempOzone2011Unfiltered <- filter(tempOzone, year == 2011)
+tempOzone2011 <- drop_na(tempOzone2011Unfiltered)
+tempOzoneAvg2011 <- tempOzone2011 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2011$year <- "2011"
+
+tempOzone2012Unfiltered <- filter(tempOzone, year == 2012)
+tempOzone2012 <- drop_na(tempOzone2012Unfiltered)
+tempOzoneAvg2012 <- tempOzone2012 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2012$year <- "2012"
+
+tempOzone2013Unfiltered <- filter(tempOzone, year == 2013)
+tempOzone2013 <- drop_na(tempOzone2013Unfiltered)
+tempOzoneAvg2013 <- tempOzone2013 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2013$year <- "2013"
+
+tempOzone2014Unfiltered <- filter(tempOzone, year == 2014)
+tempOzone2014 <- drop_na(tempOzone2014Unfiltered)
+tempOzoneAvg2014 <- tempOzone2014 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2014$year <- "2014"
+
+tempOzone2015Unfiltered <- filter(tempOzone, year == 2015)
+tempOzone2015 <- drop_na(tempOzone2015Unfiltered)
+tempOzoneAvg2015 <- tempOzone2015 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2015$year <- "2015"
+
+tempOzone2016Unfiltered <- filter(tempOzone, year == 2016)
+tempOzone2016 <- drop_na(tempOzone2016Unfiltered)
+tempOzoneAvg2016 <- tempOzone2016 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2016$year <- "2016"
+
+tempOzone2017Unfiltered <- filter(tempOzone, year == 2017)
+tempOzone2017 <- drop_na(tempOzone2017Unfiltered)
+tempOzoneAvg2017 <- tempOzone2017 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2017$year <- "2017"
+
+tempOzone2018Unfiltered <- filter(tempOzone, year == 2018)
+tempOzone2018 <- drop_na(tempOzone2018Unfiltered)
+tempOzoneAvg2018 <- tempOzone2018 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2018$year <- "2018"
+
+tempOzone2019Unfiltered <- filter(tempOzone, year == 2019)
+tempOzone2019 <- drop_na(tempOzone2019Unfiltered)
+tempOzoneAvg2019 <- tempOzone2019 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanOzone = mean(ozone),
+            medianOzone = median(ozone),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempOzoneAvg2019$year <- "2019"
+
+
+
+tempOzoneAvgs <- bind_rows(tempOzoneAvg2010, tempOzoneAvg2011, tempOzoneAvg2012, tempOzoneAvg2013, tempOzoneAvg2014, tempOzoneAvg2015, tempOzoneAvg2016, tempOzoneAvg2017, tempOzoneAvg2018, tempOzoneAvg2019)
+
+tempOzone <- drop_na(tempOzone)
+
+# regressions=function(df) {
+#   linear <- lm(tempOzone$ozone ~ tempOzone$TMAX)
+#   slope <- (round(coef(linear)[2],3))
+#   yInt <- (round(coef(linear)[1],3))
+#   rSquared <- round(as.numeric(summary(linear)[8],3))
+#   #pValue <- as.numeric(summary(linear)[11])
+#   c(slope, yInt, rSquared)
+# }
+# 
+# regressionDf <- ddply(tempOzone, "year", regressions)
+# colnames(regressionDf) <- c("year","slope", "yInt", "rSquared")
+
+#Plots between TMAX and ozone levels
+
+i <- 1
+seasonOutput <- function(df, vect) {
+  listNew <- list()
+  for (value in vect) {
+    if(value >= 3 && value <= 5) {
+      listNew[[i]] <- "Spring"
+      i <- i +1 
+    } else if (value >= 6 && value <= 8) {
+      listNew[[i]]<- "Summer"
+      i <- i +1 
+    } else if (value >= 9 && value <= 11) {
+      listNew[[i]] <- "Fall"
+      i <- i +1 
+    } else {
+      listNew[[i]] <- "Winter"
+      i <- i +1 
+    }
+  }
+  return(listNew)
+}
+
+
+# ggplot(tempOzoneAvg2010, aes(meanOzone, meanTMAX)) + geom_point() + geom_smooth(method = lm, se=FALSE) + stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), sep = "*\", \"*")), parse = TRUE)
+# 
+# linear <- lm(tempOzoneAvg2010$meanTMAX ~ tempOzoneAvg2010$meanOzone)
+# summary(linear)
+# 
+# lineareq1 <- function(x){coef(linear)[2]*x + coef(linear)[1]}
+
+
+season <- seasonOutput(tempOzone2010To2016, tempOzone2010To2016$month)
+seasonNew <- unlist(season)
+tempOzone2010To2016 <- filter(tempOzone, year <= 2016, month <= 9)
+tempOzone2010To2016 <- cbind(tempOzone2010To2016, seasonNew)
+
+
+
+tempOzoneAvgs2010To2016 <- filter(tempOzoneAvgs, year <= 2016, month <= 9)
+seasonAvgs <- unlist(seasonOutput(tempOzoneAvgs2010To2016, tempOzoneAvgs2010To2016$month))
+tempOzoneAvgs2010To2016 <- cbind(tempOzoneAvgs2010To2016, seasonAvgs)
+
+
+tempOzone2016To2019 <- filter(tempOzone, year >=2016)
+seasonNew1 <- unlist(seasonOutput(tempOzone2016To2019, tempOzone2016To2019$month))
+tempOzone2016To2019 <- cbind(tempOzone2016To2019, seasonNew1)
+
+tempOzoneAvgs2016To2019 <- filter(tempOzoneAvgs, year >=2016)
+seasonAvgs1 <- unlist(seasonOutput(tempOzoneAvgs2016To2019, tempOzoneAvgs2016To2019$month))
+tempOzoneAvgs2016To2019 <- cbind(tempOzoneAvgs2016To2019, seasonAvgs1)
+
+lm <- lm(tempOzone2010To2016$ozone ~ tempOzone2010To2016$TMAX, tempOzone2010To2016)
+ggplot(lm, aes(.fitted, .resid))  + geom_point() + facet_grid(tempOzone2010To2016$seasonNew ~ tempOzone2010To2016$year)
+
+
+ggplot(tempOzone2010To2016, aes(TMAX, ozone, color = as.character(year))) + geom_jitter()  + facet_grid(tempOzone2010To2016$seasonNew ~ tempOzone2010To2016$year) + geom_smooth(method = "lm", se = FALSE) + stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 2.2, vstep = 0.04, label.x = 0.02, label.y.npc = 0.99)+ scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#E6AB02" ,"#A6761D", "#666666")) + theme_bw() + 
+labs(title = "Maximum Temperature vs. Ozone Levels for Different Seasons From 2010 to 2016", x = "Maximum Temperature (Degrees Fahrenheit)", y = " Daily Max 8 Hour Ozone Levels (ppm)", color = "Year")
+
+#ggplot(tempOzoneAvgs2010To2016, aes(meanTMAX, meanOzone, color = as.character(year))) + geom_point() + facet_wrap(tempOzoneAvgs2010To2016$year ~.) + geom_smooth(method = "lm", se = FALSE) + theme_bw()  + 
+labs(title = "Mean Maximum Temperature vs. Mean Ozone Levels Through 2010 to 2016", x = "Mean Maximum Temperature (Degrees Farenheit)", y = "Mean Ozone Levels (ppm)")
+
+tempOzoneAvgs2017To2019Filtered <- filter(tempOzoneAvgs2016To2019, month >= 4, month <= 9, year > 2016)
+
+fourToNineMonthsJoin <- full_join(tempOzoneAvgs2010To2016, tempOzoneAvgs2017To2019Filtered)
+
+#ggplot(fourToNineMonthsJoin, aes(meanTMAX, meanOzone, color = as.character(year))) + geom_point() + facet_wrap(fourToNineMonthsJoin$year ~.) + geom_smooth(method = "lm", se = FALSE) + stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(rr.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 3, vstep = 0.04, label.x = 0.02, label.y.npc = 0.07) + theme_bw()  + 
+labs(title = "Mean Maximum Temperature vs. Mean Ozone Levels Through 2010 to 2019", x = "Mean Maximum Temperature (Degrees Farenheit)", y = "Mean Ozone Levels (ppm)")
+
+tempOzone2017To2019Filtered <- filter(tempOzone2016To2019, month>=4, month <=9, year >2016)
+
+join <- full_join(tempOzone2010To2016, tempOzone2017To2019Filtered)
+
+lm1 <- lm(join$ozone ~ join$TMAX)
+ggplot(lm1, aes(.fitted, .resid))  + geom_point() + facet_wrap(join$year ~.)
+
+
+ggplot(join, aes(TMAX, ozone, color = as.character(year))) + geom_point() + facet_wrap(join$year ~.) + geom_smooth(method = "lm", se = FALSE) + stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(rr.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 3, vstep = 0.04, label.x = 0.02, label.y.npc = 0.99) + theme_bw()  + 
+labs(title = "Maximum Temperature vs. Ozone Levels From 2010 to 2019", subtitle = "Months April to September", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Daily Max 8 Hour Ozone Levels (ppm)", color = "Year")
+
+
+lm2 <- lm(tempOzone2016To2019$ozone ~ tempOzone2016To2019$TMAX)
+ggplot(lm2, aes(.fitted, .resid))  + geom_point() + facet_wrap(tempOzone2016To2019$year ~.) 
+
+
+ggplot(tempOzone2016To2019, aes(TMAX, ozone, color = as.character(year))) + geom_point() + facet_wrap( tempOzone2016To2019$year ~.) + stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(rr.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 3, vstep = 0.04, label.x = 0.02, label.y.npc = 0.99) + geom_smooth(method = "lm", se = FALSE)  + theme_bw()  + 
+labs(title = "Maximum Temperature vs. Ozone Levels From 2016 to 2019", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Daily Max 8 Hour Ozone Levels (ppm)", color = "Year")
+
+lm3 <- lm(tempOzone2016To2019$ozone ~ tempOzone2016To2019$TMAX)
+ggplot(lm3, aes(.fitted, .resid))  + geom_point() + facet_grid(tempOzone2016To2019$seasonNew1 ~ tempOzone2016To2019$year)
+
+
+ggplot(tempOzone2016To2019, aes(TMAX, ozone, color = as.character(year))) + geom_point() + facet_grid(tempOzone2016To2019$seasonNew1 ~ tempOzone2016To2019$year) + stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(rr.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 3, vstep = 0.04, label.x = 0.02, label.y.npc = 0.99) + geom_smooth(method = "lm", se = FALSE)  + theme_bw()  + 
+labs(title = "Maximum Temperature vs. Ozone Levels for Different Seasons From 2016 to 2019", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Daily Max 8 Hour Ozone Levels (ppm)", color = "Year")
+
+
+lm4 <- lm(tempOzoneAvgs2016To2019$meanOzone ~ tempOzoneAvgs2016To2019$meanTMAX)
+ggplot(lm4, aes(.fitted, .resid))  + geom_point() + facet_wrap(tempOzoneAvgs2016To2019$year ~.)
+
+
+ggplot(tempOzoneAvgs2016To2019, aes(meanTMAX, meanOzone, color = as.character(year))) + geom_point() + facet_wrap(tempOzoneAvgs2016To2019$year ~.) + geom_smooth(method = "lm", se = FALSE) + stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(rr.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 3, vstep = 0.04, label.x = 0.02, label.y.npc = 0.97) + theme_bw()  + 
+labs(title = "Mean Maximum Temperature vs. Mean Ozone Levels From 2016 to 2019", x = "Mean Maximum Temperature (Degrees Fahrenheit)", y = "Mean of Daily Max 8 Hour Ozone Levels for Each Month(ppm)", color = "Year")
+
+
+ggplot(tempOzone, aes(TMAX, ozone, color = as.character(year))) + geom_point() + geom_smooth(method = "lm", se = FALSE) + theme_bw() 
+
+ggplot(tempOzoneAvgs, aes(meanTMAX, meanOzone, color = as.character(year))) + geom_point() + geom_smooth(method = "lm", se = FALSE) + theme_bw() 
+
+ggplot(tempOzone, aes(TMAX, ozone)) + geom_point() + geom_smooth(method = "lm") + facet_wrap(tempOzone$year ~. , nrow = 5, ncol = 2) + theme_bw() + 
+labs(title = "Maximum Temperature vs. Ozone Levels Through 2010 to 2019", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Ozone Levels (ppm)")
+
+
+ggplot(tempOzoneAvgs, aes(meanTMAX, meanOzone)) + geom_point() + geom_smooth(method = "lm") + facet_wrap(tempOzoneAvgs$year ~. , nrow = 5, ncol = 2) + theme_bw() + 
+labs(title = "Mean Maximum Temperature vs. Mean Ozone Levels Through 2010 to 2019", x = "Mean Maximum Temperature (Degrees Fahrenheit)", y = "Mean Ozone Levels (ppm)")
+
+
+
+
+#Plots between TMAX and Daily AQI levels (Daily Obs. Count = 17)
+
+ggplot(tempOzone2010To2016, aes(TMAX, DAILY_AQI_VALUE, color = as.character(year))) + geom_point() + facet_wrap(tempOzone2010To2016$seasonNew ~.) + geom_smooth(method = "lm", se = FALSE) + scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#E6AB02" ,"#A6761D", "#666666")) + theme_bw() + labs(title = "Maximum Temperature vs. Daily AQI (Air Quality Index) Levels Through 2010 to 2016", x = "Maximum Temperature (Degrees Farenheit)", y = "Daily AQI levels") 
+
+ggplot(tempOzoneAvgs2010To2016, aes(meanTMAX, meanDAILY_AQI_VALUE, color = as.character(year))) + geom_point() + geom_smooth(method = "lm", se = FALSE)  + theme_bw() + labs(title = "Mean Maximum Temperature vs. Mean Daily AQI (Air Quality Index) Levels Through 2010 to 2016", x = "Mean Maximum Temperature (Degrees Farenheit)", y = "Mean Daily AQI levels") 
+
+ggplot(tempOzone2016To2019, aes(TMAX, DAILY_AQI_VALUE, color = as.character(year))) + geom_point() + facet_wrap(tempOzone2016To2019$seasonNew1 ~.) + geom_smooth(method = "lm", se = FALSE) + scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3",  "#E6AB02" )) + theme_bw() + labs(title = "Maximum Temperature vs. Daily AQI (Air Quality Index) Levels Through 2016 to 2019 for Different Seasons", x = " Maximum Temperature (Degrees Farenheit)", y = "Daily AQI levels") 
+
+
+ggplot(tempOzoneAvgs2016To2019, aes(meanTMAX, meanDAILY_AQI_VALUE, color = as.character(year))) + geom_point() + geom_smooth(method = "lm", se = FALSE) + labs(title = "Mean Maximum Temperature vs. Mean Daily AQI (Air Quality Index) Levels Through 2016 to 2019", x = "Mean Maximum Temperature (Degrees Fahrenheit)", y = "Mean Daily AQI levels") 
+
+ggplot(tempOzone, aes(TMAX, DAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm") + labs(title = "Maximum Temperature vs. Daily AQI (Air Quality Index) Levels Through 2010 to 2019", x = "Maximum Temperature (Degrees Farenheit)", y = "Daily AQI levels")
+
+ggplot(tempOzoneAvgs, aes(meanTMAX, meanDAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm") + labs(title = "Mean Maximum Temperature vs. Mean Daily AQI (Air Quality Index) Levels Through 2010 to 2019", x = "Mean Maximum Temperature (Degrees Farenheit)", y = "Mean Daily AQI levels")
+
+ggplot(tempOzone, aes(TMAX, DAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm") + facet_wrap(tempOzone$year ~. , nrow = 5, ncol = 2) + labs(title = "Maximum Temperature vs. Daily AQI (Air Quality Index) Levels Through 2010 to 2019", x = "Maximum Temperature (Degrees Farenheit)", y = "Daily AQI levels") 
+
+ggplot(tempOzoneAvgs, aes(meanTMAX, meanDAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm") + facet_wrap(tempOzoneAvgs$year ~. , nrow = 5, ncol = 2) + labs(title = "Mean Maximum Temperature vs. Mean Daily AQI (Air Quality Index) Levels Through 2010 to 2019", x = "Mean Maximum Temperature (Degrees Farenheit)", y = "Mean Daily AQI levels")
+
+
+
+#
+
+
+
+
+qplot(tempOzoneAvgs$meanTMAX, tempOzoneAvgs$meanOzone, tempOzoneAvgs) + geom_smooth(method = "lm") + facet_grid(as.character(year ~.)) + geom_label(tempOzoneAvgs, inherit.aes = FALSE, aes(100, 10, label = paste("equation = ",eq," ","R^2 = ",rSquared," ","p-value = ", pValue)))
+
+linear <- lm(tempOzone2010$ozone ~ tempOzone2010$TMAX)
+summary(linear)
+
+
+
+
+
+
+#tempOzone2010
+cor(x = (tempOzoneAvg2010$meanTMAX), y = tempOzoneAvg2010$meanOzone)
+plot(tempOzoneAvg2010$meanTMAX, tempOzoneAvg2010$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2010$meanOzone ~ tempOzoneAvg2010$meanTMAX)
+abline(linear)
+summary(linear) 
+lineareq1 <- function(x){coef(linear)[2]*x + coef(linear)[1]}- #y = 3.419e-4x + 1.864e-2, p-value: 0.00126, R^2 = 0.6634
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2010$meanTMIN, tempOzoneAvg2010$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2010$meanTMIN, tempOzoneAvg2010$meanOzone)
+linear1 <- lm(tempOzoneAvg2010$meanOzone ~ tempOzoneAvg2010$meanTMIN)
+abline(linear1)
+summary(linear1) #y= 0.0002822x + 0.0280976, p-value: 0.02241, R^2 = 0.6438
+plot(linear1)
+
+plot(tempOzoneAvg2010$meanTMAX, tempOzoneAvg2010$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2010$meanTMAX, tempOzoneAvg2010$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2010$meanDAILY_AQI_VALUE ~ tempOzoneAvg2010$meanTMAX)
+abline(linear2)
+summary(linear2) #y = 0.46952x + 10.63635, p-value: 0.0002466, R^2 = 0.7544
+plot(linear2)
+
+plot(tempOzoneAvg2010$meanTMIN, tempOzoneAvg2010$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2010$meanTMIN, tempOzoneAvg2010$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2010$meanDAILY_AQI_VALUE ~ tempOzoneAvg2010$meanTMIN)
+abline(linear3)
+summary(linear3) # y = 0.5652x + 16.0942, p-value: 0.0002301, R^2 = 0.7577
+plot(linear3)
+
+
+plot(tempOzoneAvg2010$meanOzone, tempOzoneAvg2010$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2010$meanOzone, tempOzoneAvg2010$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2010$meanDAILY_AQI_VALUE ~ tempOzoneAvg2010$meanOzone)
+abline(linear4)
+summary(linear4) # y = 1263.835x + -10.565, p-value: 1.639e-8, R^2 = 0.9634
+plot(linear4)
+
+
+#tempOzone2011
+cor(x = (tempOzoneAvg2011$meanTMAX), y = tempOzoneAvg2011$meanOzone)
+plot(tempOzoneAvg2011$meanTMAX, tempOzoneAvg2011$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2011$meanOzone ~ tempOzoneAvg2011$meanTMAX)
+abline(linear)
+summary(linear)
+lineareq2 <- function(x){coef(linear)[2]*x + coef(linear)[1]} # y = 0.0003218x + 0.0184449, p-value: 0.01033, R^2 = 0.4981
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2011$meanTMIN, tempOzoneAvg2011$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2011$meanTMIN, tempOzoneAvg2011$meanOzone)
+linear1 <- lm(tempOzoneAvg2011$meanOzone ~ tempOzoneAvg2011$meanTMIN)
+abline(linear1)
+summary(linear1) # y = 0.0003256x + 0.0246922, p-value: 0.01371, R^2 = 0.471
+plot(linear1)
+
+plot(tempOzoneAvg2011$meanTMAX, tempOzoneAvg2011$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2011$meanTMAX, tempOzoneAvg2011$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2011$meanDAILY_AQI_VALUE ~ tempOzoneAvg2011$meanTMAX)
+abline(linear2)
+summary(linear2) # y = 0.4549x + 9.6615, p-value: 0.0072, R^2 = 0.5308
+plot(linear2)
+
+plot(tempOzoneAvg2011$meanTMIN, tempOzoneAvg2011$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2011$meanTMIN, tempOzoneAvg2011$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2011$meanDAILY_AQI_VALUE ~ tempOzoneAvg2011$meanTMIN)
+abline(linear3)
+summary(linear3) # y = 0.4571x + 18.6245, p-value: 0.01066, R^2 = 0.4951
+plot(linear3)
+
+
+plot(tempOzoneAvg2011$meanOzone, tempOzoneAvg2011$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2011$meanOzone, tempOzoneAvg2011$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2011$meanDAILY_AQI_VALUE ~ tempOzoneAvg2011$meanOzone)
+abline(linear4)
+summary(linear4) # y = 1332.098x + -13.290, p-value: 1.122e-7, R^2 = 0.9463
+plot(linear4)
+
+#tempOzone2012
+cor(x = (tempOzoneAvg2012$meanTMAX), y = tempOzoneAvg2012$meanOzone)
+plot(tempOzoneAvg2012$meanTMAX, tempOzoneAvg2012$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2012$meanOzone ~ tempOzoneAvg2012$meanTMAX)
+abline(linear)
+summary(linear) # y = 5.08e-4x + 7.459e-3, p-value: 0.0001046, R^2 = 0.7923
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2012$meanTMIN, tempOzoneAvg2012$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2012$meanTMIN, tempOzoneAvg2012$meanOzone)
+linear1 <- lm(tempOzoneAvg2012$meanOzone ~ tempOzoneAvg2012$meanTMIN)
+abline(linear1)
+summary(linear1) # y = 0.000545x + 0.015965, p-value: 0.0005387, R^2 = 0.7141
+plot(linear1)
+
+plot(tempOzoneAvg2012$meanTMAX, tempOzoneAvg2012$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2012$meanTMAX, tempOzoneAvg2012$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2012$meanDAILY_AQI_VALUE ~ tempOzoneAvg2012$meanTMAX)
+abline(linear2)
+summary(linear2) # y = .7298x + -5.9334, p-value: 4.251e-5, R^2 = 0.826
+plot(linear2)
+
+plot(tempOzoneAvg2012$meanTMIN, tempOzoneAvg2012$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2012$meanTMIN, tempOzoneAvg2012$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2012$meanDAILY_AQI_VALUE ~ tempOzoneAvg2012$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+
+plot(tempOzoneAvg2012$meanOzone, tempOzoneAvg2012$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2012$meanOzone, tempOzoneAvg2012$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2012$meanDAILY_AQI_VALUE ~ tempOzoneAvg2012$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+#tempOzone2013
+cor(x = (tempOzoneAvg2013$meanTMAX), y = tempOzoneAvg2013$meanOzone)
+plot(tempOzoneAvg2013$meanTMAX, tempOzoneAvg2013$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2013$meanOzone ~ tempOzoneAvg2013$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2013$meanTMIN, tempOzoneAvg2013$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2013$meanTMIN, tempOzoneAvg2013$meanOzone)
+linear1 <- lm(tempOzoneAvg2013$meanOzone ~ tempOzoneAvg2013$meanTMIN)
+abline(linear1)
+summary(linear1)
+plot(linear1)
+
+plot(tempOzoneAvg2013$meanTMAX, tempOzoneAvg2013$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2013$meanTMAX, tempOzoneAvg2013$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2013$meanDAILY_AQI_VALUE ~ tempOzoneAvg2013$meanTMAX)
+abline(linear2)
+summary(linear2)
+plot(linear2)
+
+plot(tempOzoneAvg2013$meanTMIN, tempOzoneAvg2013$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2013$meanTMIN, tempOzoneAvg2013$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2013$meanDAILY_AQI_VALUE ~ tempOzoneAvg2013$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+
+plot(tempOzoneAvg2013$meanOzone, tempOzoneAvg2013$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2013$meanOzone, tempOzoneAvg2013$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2013$meanDAILY_AQI_VALUE ~ tempOzoneAvg2013$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+#tempOzone2014
+cor(x = (tempOzoneAvg2014$meanTMAX), y = tempOzoneAvg2014$meanOzone)
+plot(tempOzoneAvg2014$meanTMAX, tempOzoneAvg2014$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2014$meanOzone ~ tempOzoneAvg2014$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2014$meanTMIN, tempOzoneAvg2014$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2014$meanTMIN, tempOzoneAvg2014$meanOzone)
+linear1 <- lm(tempOzoneAvg2014$meanOzone ~ tempOzoneAvg2014$meanTMIN)
+abline(linear1)
+summary(linear1)
+plot(linear1)
+
+plot(tempOzoneAvg2014$meanTMAX, tempOzoneAvg2014$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2014$meanTMAX, tempOzoneAvg2014$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2014$meanDAILY_AQI_VALUE ~ tempOzoneAvg2014$meanTMAX)
+abline(linear2)
+summary(linear2)
+plot(linear2)
+
+plot(tempOzoneAvg2014$meanTMIN, tempOzoneAvg2014$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2014$meanTMIN, tempOzoneAvg2014$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2014$meanDAILY_AQI_VALUE ~ tempOzoneAvg2014$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+
+plot(tempOzoneAvg2014$meanOzone, tempOzoneAvg2014$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2014$meanOzone, tempOzoneAvg2014$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2014$meanDAILY_AQI_VALUE ~ tempOzoneAvg2014$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+#tempOzone2015
+cor(x = (tempOzoneAvg2015$meanTMAX), y = tempOzoneAvg2015$meanOzone)
+plot(tempOzoneAvg2015$meanTMAX, tempOzoneAvg2015$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2015$meanOzone ~ tempOzoneAvg2015$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2015$meanTMIN, tempOzoneAvg2015$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2015$meanTMIN, tempOzoneAvg2015$meanOzone)
+linear1 <- lm(tempOzoneAvg2015$meanOzone ~ tempOzoneAvg2015$meanTMIN)
+abline(linear1)
+summary(linear1)
+plot(linear1)
+
+plot(tempOzoneAvg2015$meanTMAX, tempOzoneAvg2015$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2015$meanTMAX, tempOzoneAvg2015$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2015$meanDAILY_AQI_VALUE ~ tempOzoneAvg2015$meanTMAX)
+abline(linear2)
+summary(linear2)
+plot(linear2)
+
+plot(tempOzoneAvg2015$meanTMIN, tempOzoneAvg2015$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2015$meanTMIN, tempOzoneAvg2015$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2015$meanDAILY_AQI_VALUE ~ tempOzoneAvg2015$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+
+plot(tempOzoneAvg2015$meanOzone, tempOzoneAvg2015$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2015$meanOzone, tempOzoneAvg2015$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2015$meanDAILY_AQI_VALUE ~ tempOzoneAvg2015$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+#tempOzone2016
+cor(x = (tempOzoneAvg2016$meanTMAX), y = tempOzoneAvg2016$meanOzone)
+plot(tempOzoneAvg2016$meanTMAX, tempOzoneAvg2016$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2016$meanOzone ~ tempOzoneAvg2016$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2016$meanTMIN, tempOzoneAvg2016$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2016$meanTMIN, tempOzoneAvg2016$meanOzone)
+linear1 <- lm(tempOzoneAvg2016$meanOzone ~ tempOzoneAvg2016$meanTMIN)
+abline(linear1)
+summary(linear1)
+plot(linear1)
+
+plot(tempOzoneAvg2016$meanTMAX, tempOzoneAvg2016$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2016$meanTMAX, tempOzoneAvg2016$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2016$meanDAILY_AQI_VALUE ~ tempOzoneAvg2016$meanTMAX)
+abline(linear2)
+summary(linear2)
+plot(linear2)
+
+plot(tempOzoneAvg2016$meanTMIN, tempOzoneAvg2016$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2016$meanTMIN, tempOzoneAvg2016$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2016$meanDAILY_AQI_VALUE ~ tempOzoneAvg2016$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+
+plot(tempOzoneAvg2016$meanOzone, tempOzoneAvg2016$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2016$meanOzone, tempOzoneAvg2016$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2016$meanDAILY_AQI_VALUE ~ tempOzoneAvg2016$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+#tempOzone2017
+cor(x = (tempOzoneAvg2017$meanTMAX), y = tempOzoneAvg2017$meanOzone)
+plot(tempOzoneAvg2017$meanTMAX, tempOzoneAvg2017$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2017$meanOzone ~ tempOzoneAvg2017$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2017$meanTMIN, tempOzoneAvg2017$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2017$meanTMIN, tempOzoneAvg2017$meanOzone)
+linear1 <- lm(tempOzoneAvg2017$meanOzone ~ tempOzoneAvg2017$meanTMIN)
+abline(linear1)
+summary(linear1)
+plot(linear1)
+
+plot(tempOzoneAvg2017$meanTMAX, tempOzoneAvg2017$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2017$meanTMAX, tempOzoneAvg2017$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2017$meanDAILY_AQI_VALUE ~ tempOzoneAvg2017$meanTMAX)
+abline(linear2)
+summary(linear2)
+plot(linear2)
+
+plot(tempOzoneAvg2017$meanTMIN, tempOzoneAvg2017$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2017$meanTMIN, tempOzoneAvg2017$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2017$meanDAILY_AQI_VALUE ~ tempOzoneAvg2017$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+plot(tempOzoneAvg2017$meanOzone, tempOzoneAvg2017$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2017$meanOzone, tempOzoneAvg2017$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2017$meanDAILY_AQI_VALUE ~ tempOzoneAvg2017$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+#tempOzone2018
+cor(x = (tempOzoneAvg2018$meanTMAX), y = tempOzoneAvg2018$meanOzone)
+plot(tempOzoneAvg2018$meanTMAX, tempOzoneAvg2018$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2018$meanOzone ~ tempOzoneAvg2018$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2018$meanTMIN, tempOzoneAvg2018$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2018$meanTMIN, tempOzoneAvg2018$meanOzone)
+linear1 <- lm(tempOzoneAvg2018$meanOzone ~ tempOzoneAvg2018$meanTMIN)
+abline(linear1)
+summary(linear1)
+plot(linear1)
+
+plot(tempOzoneAvg2018$meanTMAX, tempOzoneAvg2018$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2018$meanTMAX, tempOzoneAvg2018$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2018$meanDAILY_AQI_VALUE ~ tempOzoneAvg2018$meanTMAX)
+abline(linear2)
+summary(linear2)
+plot(linear2)
+
+plot(tempOzoneAvg2018$meanTMIN, tempOzoneAvg2018$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2018$meanTMIN, tempOzoneAvg2018$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2018$meanDAILY_AQI_VALUE ~ tempOzoneAvg2018$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+
+plot(tempOzoneAvg2018$meanOzone, tempOzoneAvg2018$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2018$meanOzone, tempOzoneAvg2018$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2018$meanDAILY_AQI_VALUE ~ tempOzoneAvg2018$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+#tempOzone2019
+cor(x = (tempOzoneAvg2019$meanTMAX), y = tempOzoneAvg2019$meanOzone)
+plot(tempOzoneAvg2019$meanTMAX, tempOzoneAvg2019$meanOzone, main = "Scatterplot")
+linear <- lm(tempOzoneAvg2019$meanOzone ~ tempOzoneAvg2019$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear) #residual plot
+# par(mfrow = c(1,1)) - in console
+# plot(linear) - in console
+
+plot(tempOzoneAvg2019$meanTMIN, tempOzoneAvg2019$meanOzone,main = "Scatterplot")
+cor(tempOzoneAvg2019$meanTMIN, tempOzoneAvg2019$meanOzone)
+linear1 <- lm(tempOzoneAvg2019$meanOzone ~ tempOzoneAvg2019$meanTMIN)
+abline(linear1)
+summary(linear1)
+plot(linear1)
+
+plot(tempOzoneAvg2019$meanTMAX, tempOzoneAvg2019$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2019$meanTMAX, tempOzoneAvg2019$meanDAILY_AQI_VALUE)
+linear2 <- lm(tempOzoneAvg2019$meanDAILY_AQI_VALUE ~ tempOzoneAvg2019$meanTMAX)
+abline(linear2)
+summary(linear2)
+plot(linear2)
+
+plot(tempOzoneAvg2019$meanTMIN, tempOzoneAvg2019$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2019$meanTMIN, tempOzoneAvg2019$meanDAILY_AQI_VALUE)
+linear3 <- lm(tempOzoneAvg2019$meanDAILY_AQI_VALUE ~ tempOzoneAvg2019$meanTMIN)
+abline(linear3)
+summary(linear3)
+plot(linear3)
+
+
+plot(tempOzoneAvg2019$meanOzone, tempOzoneAvg2019$meanDAILY_AQI_VALUE, main = "Scatterplot")
+cor(tempOzoneAvg2019$meanOzone, tempOzoneAvg2019$meanDAILY_AQI_VALUE)
+linear4 <- lm(tempOzoneAvg2019$meanDAILY_AQI_VALUE ~ tempOzoneAvg2019$meanOzone)
+abline(linear4)
+summary(linear4)
+plot(linear4)
+
+
+
+
+#temp v. pm
+
+pmBasic <- select(pmData, year, month, day, pm, DAILY_AQI_VALUE)
+Na <- is.na(pmBasic)
+sum(Na)
+tempBasic <- select(tempData, year, month, day, TMAX, TMIN)
+tempPm<- full_join(pmBasic, tempBasic, by = c("month", "day", "year"))
+tempPm <- drop_na(tempPm)
+
+tempPm2010Unfiltered <- filter(tempPm, year == 2010)
+tempPm2010 <- drop_na(tempPm2010Unfiltered)
+tempPmAvg2010 <- tempPm2010 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2010$year <- "2010"
+
+  
+tempPm2011Unfiltered <- filter(tempPm, year == 2011)
+tempPm2011 <- drop_na(tempPm2011Unfiltered)
+tempPmAvg2011 <- tempPm2011 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2011$year <- "2011"
+
+tempPm2012Unfiltered <- filter(tempPm, year == 2012)
+tempPm2012 <- drop_na(tempPm2012Unfiltered)
+tempPmAvg2012 <- tempPm2012 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2012$year <- "2012"
+
+tempPm2013Unfiltered <- filter(tempPm, year == 2013)
+tempPm2013 <- drop_na(tempPm2013Unfiltered)
+tempPmAvg2013 <- tempPm2013 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2013$year <- "2013"
+
+tempPm2014Unfiltered <- filter(tempPm, year == 2014)
+tempPm2014 <- drop_na(tempPm2014Unfiltered)
+tempPmAvg2014 <- tempPm2014 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2014$year <- "2014"
+
+tempPm2015Unfiltered <- filter(tempPm, year == 2015)
+tempPm2015 <- drop_na(tempPm2015Unfiltered)
+tempPmAvg2015 <- tempPm2015 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2015$year <- "2015"
+
+tempPm2016Unfiltered <- filter(tempPm, year == 2016)
+tempPm2016 <- drop_na(tempPm2016Unfiltered)
+tempPmAvg2016 <- tempPm2016 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2016$year <- "2016"
+
+tempPm2017Unfiltered <- filter(tempPm, year == 2017)
+tempPm2017 <- drop_na(tempPm2017Unfiltered)
+tempPmAvg2017 <- tempPm2017 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2017$year <- "2017"
+
+tempPm2018Unfiltered <- filter(tempPm, year == 2018)
+tempPm2018 <- drop_na(tempPm2018Unfiltered)
+tempPmAvg2018 <- tempPm2018 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2018$year <- "2018"
+
+tempPm2019Unfiltered <- filter(tempPm, year == 2019)
+tempPm2019 <- drop_na(tempPm2019Unfiltered)
+tempPmAvg2019 <- tempPm2019 %>%
+  group_by(month) %>%
+  summarise(meanTMAX = mean(TMAX),
+            medianTMAX = median(TMAX),
+            meanTMIN = mean(TMIN),
+            medianTMIN = median(TMIN),
+            meanPm = mean(pm),
+            medianPm = median(pm),
+            meanDAILY_AQI_VALUE = mean(DAILY_AQI_VALUE),
+            medianDAILY_AQI_VALUE = median(DAILY_AQI_VALUE)) %>%
+  data.frame()
+tempPmAvg2019$year <- "2019"
+
+
+
+tempPmAvgs <- bind_rows(tempPmAvg2010, tempPmAvg2011, tempPmAvg2012, tempPmAvg2013, tempPmAvg2014, tempPmAvg2015, tempPmAvg2016, tempPmAvg2017, tempPmAvg2018, tempPmAvg2019)
+
+seasonPm <- unlist(seasonOutput(tempPm, tempPm$month))
+tempPm <- cbind(tempPm, seasonPm)
+
+
+
+
+#Plots between TMAX and PM
+
++ scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#E6AB02" ,"#A6761D", "#666666")) + theme_bw() + 
+labs(title = "Maximum Temperature vs. Ozone Levels for Different Seasons Through 2010 to 2016", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Ozone levels (ppm)")
+
+lm <- lm(tempPm$pm ~ tempPm$TMAX)
+ggplot(lm, aes(.fitted, .resid))  + geom_point() + facet_grid(tempPm$seasonPm ~ tempPm$year)
+
+ggplot(tempPm, aes(TMAX, pm, color = as.character(year))) + geom_point() + facet_grid(tempPm$seasonPm ~ tempPm$year) + geom_smooth(method = "lm", se = FALSE) +  stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), sep = "*\", \"*")), parse = TRUE, size = 2.5, vstep = 0.04, label.x = 0.02, label.y.npc = 0.99) + labs(title = "Maximum Temperature vs. Daily Mean PM2.5 Levels for Different Seasons From 2010 to 2019", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Daily Mean PM2.5 Levels (micrograms/cubic meter)", color = "Year") + theme_bw()
+
+summerMonthsTempPM <- filter(tempPm, seasonPm == "Summer")
+
+lm1 <- lm(summerMonthsTempPM$pm ~ summerMonthsTempPM$TMAX)
+ggplot(lm1, aes(.fitted, .resid))  + geom_point() + facet_wrap(summerMonthsTempPM$year ~.)
+
+ggplot(summerMonthsTempPM, aes(TMAX, pm, color = as.character(year))) + geom_point() + facet_wrap(summerMonthsTempPM$year ~.) + geom_smooth(method = "lm", se = FALSE) +  stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(rr.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 2.5, vstep = 0.04, label.x = 0.02, label.y.npc = 0.99) + labs(title = "Maximum Temperature vs. Daily Mean PM2.5 Levels for Summer Seasons From 2010 to 2019", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Daily Mean PM2.5 Levels (micrograms/cubic meter)", color = "Year") + theme_bw()
+
+
+
+ggplot(tempPmAvgs, aes(meanTMAX, meanPm, color = as.character(year))) + geom_point() + facet_wrap(tempPmAvgs$year ~.) + geom_smooth(method = "lm", se = FALSE) + theme_bw() +
+labs(title = "Mean Maximum Temperature vs. Mean PM2.5 Through 2010 to 2019", x = "Mean Maximum Temperature (Degrees Farenheit)", y = "Average of Daily Mean PM2.5 (ug/m3 LC)")
+
+lm2 <- lm(tempPm$pm ~ tempPm$TMAX)
+ggplot(lm2, aes(.fitted, .resid))  + geom_point() + facet_wrap(tempPm$year ~.)
+
+ggplot(tempPm, aes(TMAX, pm, color = as.character(year))) + geom_point() + geom_smooth(method = "lm") + facet_wrap(tempPm$year ~.) +  stat_poly_eq(formula = y ~ x, aes(label = paste(stat(eq.label), stat(rr.label), stat(p.value.label), sep = "*\", \"*")), parse = TRUE, size = 3, vstep = 0.04, label.x = 0.02, label.y.npc = 0.99) + 
+labs(title = "Maximum Temperature vs. PM2.5 Levels From 2010 to 2019", x = "Maximum Temperature (Degrees Farenheit)", y = " Daily Mean PM2.5 Levels (microgram/cubic meter)", color = "Year") + theme_bw()
+
+
+
+
+#Plots between TMAX and Daily AQI Value (Daily Obs. Count = 1)
+ggplot(tempPm, aes(TMAX, DAILY_AQI_VALUE, color = as.character(year))) + geom_point() + facet_wrap(tempPm$seasonPm ~.) + geom_smooth(method = "lm", se = FALSE)
+
+ggplot(tempPmAvgs, aes(meanTMAX, meanDAILY_AQI_VALUE, color = as.character(year))) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+
+ggplot(tempPm, aes(TMAX, DAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm")
+
+ggplot(tempPmAvgs, aes(meanTMAX, meanDAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm")
+
+ggplot(tempPm, aes(TMAX, DAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm") + facet_wrap(tempPm$year ~. , nrow = 5, ncol = 2) 
+
+ggplot(tempPmAvgs, aes(meanTMAX, meanDAILY_AQI_VALUE)) + geom_point() + geom_smooth(method = "lm") + facet_wrap(tempPmAvgs$year ~. , nrow = 5, ncol = 2) 
+
+
+
+
+cor(tempPmAvg2019$medianTMAX, tempPmAvg2019$medianPm)
+plot(tempPmAvg2019$medianTMAX, tempPmAvg2019$meanPm, main = "Scatterplot")
+linear <- lm(tempPmAvg2010$meanPm ~ tempPmAvg2010$meanTMAX)
+abline(linear)
+summary(linear)
+plot(linear)
+
+cor(x = (tempPmAvg2010$meanPm), y = (tempPmAvg2010$meanAQI))
+plot(tempPmAvg2010$meanPm, (tempPmAvg2010$meanAQI), main = "Scatterplot")
+linear <- lm(tempPmAvg2010$meanAQI ~ tempPmAvg2010$meanPm)
+abline(linear)
+summary(linear)
+plot(linear)
+
+
+
+
+#temp v. annual hospitalizations
+
+dischargeTbl <- read_csv("Hosital Discharges - Sheet1.csv")
+tempAvgs2000_2014 <- read_csv("TempAvgs2000to2014.csv")
+tempAvgs2000_2014 <- rename(tempAvgs2000_2014, Year = "DATE")
+dischargeTbl <- dischargeTbl %>% rename(disease = "Disease Condition")
+dischargeTbl <- filter(dischargeTbl, Year != 2015)
+Na <- is.na(dischargeTbl)
+sum(Na)
+dischargeTbl<- drop_na(dischargeTbl)
+
+diseaseSummary <- dischargeTbl %>%
+  group_by(disease) %>%
+  summarise(count = sum(Number))
+ggplot(dischargeTbl, aes(x= disease, y = Number)) + geom_col(aes(fill = as.character(Year)))
+
+dischargeTblTemps <- full_join(dischargeTbl, tempAvgs2000_2014, by = c("Year"))
+
+table <- tempAvgs2000_2014 %>%
+  group_by(Year) %>%
+  summarise(AvgTemp = TAVG, 
+            MaxTemp = TMAX, 
+            MinTemp = TMIN) %>%
+  knitr::kable()
+
+
+
+
+ggplot(dischargeTblTemps, aes(as.character(Year), Number)) + geom_col(aes(fill = disease)) + theme_bw() + labs(title = "Average Temperature from Years 2000 to 2014 vs. Hospitalizations for Certain Diseases", x = "Average Temperature (Degrees Fahrenheit)", y = "Hospitalizations", fill = "Disease") + scale_y_continuous(breaks = seq(0, 200000, 10000)) + scale_x_discrete(labels = c ("2000" = "2000(50.7)", "2001" = "2001(52.4)", "2002" = "2002(52.4)", "2003" = "2003(49.9)", "2004"= "2004(51.2)", "2005" = "2005(51.6)", "2006" = "2006(53.3)", "2007" = "2007(51.9)", "2008" = "2008(51.8)", "2009" = "2009(51.6)", "2010" = "2010(54.4)", "2011" = "2011(53.1)", "2012" = "2012(54.6)", "2013" = "2013(51.9)", "2014" = "2014(50.4)"))
+
+ggplot(dischargeTblTemps, aes(as.character(Year), Number)) + geom_col(aes(fill = disease)) + theme_bw() + labs(title = "Average Temperature from Years 2000 to 2014 vs. Hospitalizations for Certain Diseases", x = "Average Temperature (Degrees Fahrenheit)", y = "Hospitalizations", fill = "Disease") + scale_y_continuous(breaks = seq(0, 200000, 10000)) + scale_x_discrete(limits = c("2003", "2014", "2000", "2004", "2005", "2009", "2008", "2007", "2013", "2001", "2002", "2011", "2006", "2010","2012"), labels = c ("2000" = "2000(50.7)", "2001" = "2001(52.4)", "2002" = "2002(52.4)", "2003" = "2003(49.9)", "2004"= "2004(51.2)", "2005" = "2005(51.6)", "2006" = "2006(53.3)", "2007" = "2007(51.9)", "2008" = "2008(51.8)", "2009" = "2009(51.6)", "2010" = "2010(54.4)", "2011" = "2011(53.1)", "2012" = "2012(54.6)", "2013" = "2013(51.9)", "2014" = "2014(50.4)"))
+
+
+ggplot(dischargeTblTemps, aes(x= as.character(Year), y = Number)) + geom_col(aes(fill = disease)) + theme_bw() + labs(title = "Maximum Temperature from Years 2000 to 2014 vs. Hospitalizations for Certain Diseases", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Hospitalizations", fill = "Disease")+ scale_y_continuous(breaks = seq(0, 200000, 10000)) + scale_x_discrete(labels = c ("2000" = "2000(60.0)", "2001" = "2001(62.3)", "2002" = "2002(61.8)", "2003" = "2003(58.8)", "2004"= "2004(60.4)", "2005" = "2005(61.1)", "2006" = "2006(62.4)", "2007" = "2007(61.3)", "2008" = "2008(61.1)", "2009" = "2009(60.5)", "2010" = "2010(63.7)", "2011" = "2011(62.3)", "2012" = "2012(63.7)", "2013" = "2013(61.2)", "2014" = "2014(59.7)"))
+
+ggplot(dischargeTblTemps, aes(x= as.character(Year), y = Number)) + geom_col(aes(fill = disease)) + theme_bw() + labs(title = "Maximum Temperature from Years 2000 to 2014 vs. Hospitalizations for Certain Diseases", x = "Maximum Temperature (Degrees Fahrenheit)", y = "Hospitalizations", fill = "Disease")+ scale_y_continuous(breaks = seq(0, 200000, 10000)) + scale_x_discrete(limits = c("2003", "2014", "2000", "2004", "2009", "2008", "2013", "2007", "2002", "2001", "2011", "2006", "2010", "2012"), labels = c ("2000" = "2000(60.0)", "2001" = "2001(62.3)", "2002" = "2002(61.8)", "2003" = "2003(58.8)", "2004"= "2004(60.4)", "2005" = "2005(61.1)", "2006" = "2006(62.4)", "2007" = "2007(61.3)", "2008" = "2008(61.1)", "2009" = "2009(60.5)", "2010" = "2010(63.7)", "2011" = "2011(62.3)", "2012" = "2012(63.7)", "2013" = "2013(61.2)", "2014" = "2014(59.7)"))
+
+ggplot(dischargeTblTemps, aes(x= as.character(Year), y = Number)) + geom_col(aes(fill = disease))+ theme_bw() + labs(title = "Minimum Temperature from Years 2000 to 2014 vs. Hospitalizations for Certain Diseases", x = "Minimum Temperature (Degrees Fahrenheit)", y = "Hospitalizations", fill = "Disease")+ scale_y_continuous(breaks = seq(0, 200000, 10000)) + scale_x_discrete(labels = c ("2000" = "2000(41.5)", "2001" = "2001(42.5)", "2002" = "2002(42.9)", "2003" = "2003(40.9)", "2004"= "2004(41.9)", "2005" = "2005(42.2)", "2006" = "2006(44.2)", "2007" = "2007(42.4)", "2008" = "2008(42.5)", "2009" = "2009(42.7)", "2010" = "2010(45)", "2011" = "2011(43.9)", "2012" = "2012(45.4)", "2013" = "2013(42.7)", "2014" = "2014(41.2)"))
+
+ggplot(dischargeTblTemps, aes(x= as.character(Year), y = Number)) + geom_col(aes(fill = disease))+ theme_bw() + labs(title = "Minimum Temperature from Years 2000 to 2014 vs. Hospitalizations for Certain Diseases", x = "Minimum Temperature (Degrees Fahrenheit)", y = "Hospitalizations", fill = "Disease")+ scale_y_continuous(breaks = seq(0, 200000, 10000)) + scale_x_discrete(limits = c("2003","2014", "2000", "2004", "2005", "2007", "2008", "2001", "2009", "2013", "2002", "2011", "2006", "2010",  "2012"), labels = c ("2000" = "2000(41.5)", "2001" = "2001(42.5)", "2002" = "2002(42.9)", "2003" = "2003(40.9)", "2004"= "2004(41.9)", "2005" = "2005(42.2)", "2006" = "2006(44.2)", "2007" = "2007(42.4)", "2008" = "2008(42.5)", "2009" = "2009(42.7)", "2010" = "2010(45)", "2011" = "2011(43.9)", "2012" = "2012(45.4)", "2013" = "2013(42.7)", "2014" = "2014(41.2)"))
+
+ggplot(dischargeTblTemps, aes(x= as.character(TAVG), y = Number)) + geom_col(aes(fill = Age)) + theme_bw() + labs(title = "Average Temperature from Years 2000 to 2014 vs. Hospitalizations By Age Groups", x = "Average Temperature(Degrees Farenhet)", y = "Hospitalizations")+ scale_y_continuous(breaks = seq(0, 200000, 10000))
+
+ggplot(dischargeTblTemps, aes(x= as.character(TMAX), y = Number)) + geom_col(aes(fill = Age))+ theme_bw() + labs(title = "Maximum Temperature from Years 2000 to 2014 vs. Hospitalizations By Age Groups", x = "Maximum Temperature(Degrees Farenhet)", y = "Hospitalizations")+ scale_y_continuous(breaks = seq(0, 200000, 10000))
+
+ggplot(dischargeTblTemps, aes(x= as.character(TMIN), y = Number)) + geom_col(aes(fill = Age))+ theme_bw() + labs(title = "Minimum Temperature from Years 2000 to 2014 vs. Hospitalizations By Age Groups", x = "Minimum  Temperature(Degrees Farenhet)", y = "Hospitalizations")+ scale_y_continuous(breaks = seq(0, 200000, 10000))
+
+
+# tempAnomoly Time Series
+
+
+tempAvgCT1895To2019 <- read_csv("1895to2019 - Sheet1.csv", skip = 4)
+anomalies1 <- pull(tempAvgCT1895To2019, Anomaly)
+anomaliesTs1 <- ts(anomalies1, start = c(1895,1), end = c(2019,12), frequency = 12)
+print(anomaliesTs1)
+plot(anomaliesTs1, ylab = "Temperature (Degrees Fahrenheit) Anomalies Relative to Month (1901-2000 Baseline)", main = "Temperature Anomalies Relative to Month from 1895 to 2019")
+
+ggplot(anomaliesTs1, aes(x = time, y = anomaliesTs1)) + geom_line() + stat_smooth() + scale_x_continuous(breaks = seq(1895, 2020, 2), guide = guide_axis(angle = 90)) + theme_bw() + labs(title = "Temperature Anomalies Relative to Each Month from 1895 to 2019", subtitle = "Relative to Each Month Baseline from 1901 to 2000 ", x = "Time", y = "Temperature Anomalies (Degrees Fahrenheit) Relative to Month")
+
+
+
+tempAvgCT2000To2019 <- read_csv("2000to2019 - Sheet1.csv", skip = 4)
+anomalies2 <- pull(tempAvgCT2000To2019, Anomaly)
+anomaliesTs2 <- ts(anomalies2, start = c(2000,1), end = c(2019,12), frequency = 12)
+print(anomaliesTs2)
+plot(anomaliesTs2, ylab = "Temperature (Degrees Fahrenheit) Anomalies Relative to Month (1901-2000 Baseline)", main = "Temperature Anomalies Relative to Month from 2000 to 2019", type = "o")
+
+ggplot(anomaliesTs2, aes(x = time, y = anomaliesTs2)) + geom_line() + stat_smooth() + scale_x_continuous(breaks = seq(2000, 2020, 1))+ theme_bw() + labs(title = "Temperature Anomalies Relative to Each Month from 2000 to 2019", subtitle = "Relative to Each Month Baseline from 1901 to 2000 ", x = "Time" , y = "Temperature  Anomalies (Degrees Fahrenheit) Relative to Month")
+ 
+
+tempAvgCT2010To2019 <- read_csv("2010to2019 - Sheet1.csv", skip = 4)
+anomalies3 <- pull(tempAvgCT2010To2019, Anomaly)
+anomaliesTs3 <- ts(anomalies3, start = c(2010,1), end = c(2019,12), frequency = 12)
+print(anomaliesTs3)
+plot(anomaliesTs3, type = "o", ylab = "Temperature (Degrees Fahrenheit) Anomalies Relative to Month (1901-2000 Baseline)", main = "Temperature Anomalies Relative to Month from 2010 to 2019")
+
+ggplot(anomaliesTs3, aes(x = time, y = anomaliesTs3)) + geom_line() + stat_smooth() + scale_x_continuous(breaks = seq(2010, 2020, 1))+ theme_bw() + labs(title = "Temperature Anomalies Relative to Each Month from 2010 to 2019", subtitle = "Realtive to Each Month Baseline from 1901 to 2000 ", x = "Time" , y = "Temperature (Degrees Fahreheit) Anomalies Relative to Month")
+
+
+# tempAvgCT2000to2019 <- read_csv("AvgTemp 2000 to 2019 CT - Sheet1.csv", 
+#     skip = 13)
+# anomalies <- pull(tempAvgCT2000to2019, Anomaly)
+# anomaliesTs <- ts(anomalies, start = c(2000,1), end = c(2019,12), frequency = 12)
+# print(anomaliesTs)
+# plot(anomaliesTs)
+# 
+# tempAvgCT <- read_csv("6-tavg-all-1-2010-2021.csv", 
+#     skip = 5)
+# anomalies <- pull(tempAvgCT, Anomaly)
+# anomaliesTs <- ts(anomalies, start = c(2010,1), end = c(2019,12), frequency = 12)
+# print(anomaliesTs)
+# plot(anomaliesTs)
+
+
+
+
+
+
+
+  
+```
+
+
+

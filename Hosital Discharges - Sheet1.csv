@@ -1,0 +1,577 @@
+Disease Condition,Number,Year,Age,ICD-9-CM Code Num. 
+Pneumonia & influenza ,718,2000,0-4,480-487
+Chronic bronchitis ,NA,2000,0-4,491
+Emphysema,0,2000,0-4,492
+Asthma,662,2000,0-4,493
+"Renal failure, nephritis",7,2000,0-4,580-589
+Diseases of the heart (CVD),43,2000,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,278,2000,5- 14,480-487
+Chronic bronchitis ,NA,2000,5- 14,491
+Emphysema,0,2000,5- 14,492
+Asthma,599,2000,5- 14,493
+"Renal failure, nephritis",27,2000,5- 14,580-589
+Diseases of the heart (CVD),39,2000,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,167,2000,15-24,480-487
+Chronic bronchitis ,NA,2000,15-24,491
+Emphysema,NA,2000,15-24,492
+Asthma,NA,2000,15-24,493
+"Renal failure, nephritis",33,2000,15-24,580-589
+Diseases of the heart (CVD),144,2000,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,1026,2000,25-44,480-487
+Chronic bronchitis ,118,2000,25-44,491
+Emphysema,9,2000,25-44,492
+Asthma,965,2000,25-44,493
+"Renal failure, nephritis",154,2000,25-44,580-589
+Diseases of the heart (CVD),2177,2000,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2194,2000,45-64,480-487
+Chronic bronchitis ,1087,2000,45-64,491
+Emphysema,33,2000,45-64,492
+Asthma,832,2000,45-64,493
+"Renal failure, nephritis",448,2000,45-64,580-589
+Diseases of the heart (CVD),12165,2000,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,8892,2000,65+,480-487
+Chronic bronchitis ,3321,2000,65+,491
+Emphysema,92,2000,65+,492
+Asthma,602,2000,65+,493
+"Renal failure, nephritis",1408,2000,65+,580-589
+Diseases of the heart (CVD),31117,2000,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,690,2001,0-4,480-487
+Chronic bronchitis ,0,2001,0-4,491
+Emphysema,0,2001,0-4,492
+Asthma,765,2001,0-4,493
+"Renal failure, nephritis",13,2001,0-4,580-589
+Diseases of the heart (CVD),38,2001,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,254,2001,5- 14,480-487
+Chronic bronchitis ,NA,2001,5- 14,491
+Emphysema,0,2001,5- 14,492
+Asthma,592,2001,5- 14,493
+"Renal failure, nephritis",30,2001,5- 14,580-589
+Diseases of the heart (CVD),50,2001,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,161,2001,15-24,480-487
+Chronic bronchitis ,NA,2001,15-24,491
+Emphysema,NA,2001,15-24,492
+Asthma,234,2001,15-24,493
+"Renal failure, nephritis",24,2001,15-24,580-589
+Diseases of the heart (CVD),152,2001,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,985,2001,25-44,480-487
+Chronic bronchitis ,107,2001,25-44,491
+Emphysema,15,2001,25-44,492
+Asthma,939,2001,25-44,493
+"Renal failure, nephritis",195,2001,25-44,580-589
+Diseases of the heart (CVD),2222,2001,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2089,2001,45-64,480-487
+Chronic bronchitis ,1011,2001,45-64,491
+Emphysema,40,2001,45-64,492
+Asthma,872,2001,45-64,493
+"Renal failure, nephritis",465,2001,45-64,580-589
+Diseases of the heart (CVD),12084,2001,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,8687,2001,65+,480-487
+Chronic bronchitis ,3142,2001,65+,491
+Emphysema,70,2001,65+,492
+Asthma,587,2001,65+,493
+"Renal failure, nephritis",1417,2001,65+,580-589
+Diseases of the heart (CVD),30972,2001,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,790,2002,0-4,480-487
+Chronic bronchitis ,NA,2002,0-4,491
+Emphysema,0,2002,0-4,492
+Asthma,825,2002,0-4,493
+"Renal failure, nephritis",20,2002,0-4,580-589
+Diseases of the heart (CVD),46,2002,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,265,2002,5- 14,480-487
+Chronic bronchitis ,0,2002,5- 14,491
+Emphysema,0,2002,5- 14,492
+Asthma,654,2002,5- 14,493
+"Renal failure, nephritis",29,2002,5- 14,580-589
+Diseases of the heart (CVD),49,2002,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,173,2002,15-24,480-487
+Chronic bronchitis ,NA,2002,15-24,491
+Emphysema,7,2002,15-24,492
+Asthma,310,2002,15-24,493
+"Renal failure, nephritis",27,2002,15-24,580-589
+Diseases of the heart (CVD),156,2002,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,980,2002,25-44,480-487
+Chronic bronchitis ,97,2002,25-44,491
+Emphysema,8,2002,25-44,492
+Asthma,1003,2002,25-44,493
+"Renal failure, nephritis",183,2002,25-44,580-589
+Diseases of the heart (CVD),2142,2002,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2235,2002,45-64,480-487
+Chronic bronchitis ,1092,2002,45-64,491
+Emphysema,34,2002,45-64,492
+Asthma,970,2002,45-64,493
+"Renal failure, nephritis",465,2002,45-64,580-589
+Diseases of the heart (CVD),11908,2002,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,9239,2002,65+,480-487
+Chronic bronchitis ,3170,2002,65+,491
+Emphysema,75,2002,65+,492
+Asthma,682,2002,65+,493
+"Renal failure, nephritis",1431,2002,65+,580-589
+Diseases of the heart (CVD),30664,2002,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,927,2003,0-4,480-487
+Chronic bronchitis ,0,2003,0-4,491
+Emphysema,0,2003,0-4,492
+Asthma,812,2003,0-4,493
+"Renal failure, nephritis",13,2003,0-4,580-589
+Diseases of the heart (CVD),51,2003,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,389,2003,5- 14,480-487
+Chronic bronchitis ,NA,2003,5- 14,491
+Emphysema,0,2003,5- 14,492
+Asthma,686,2003,5- 14,493
+"Renal failure, nephritis",22,2003,5- 14,580-589
+Diseases of the heart (CVD),57,2003,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,200,2003,15-24,480-487
+Chronic bronchitis ,NA,2003,15-24,491
+Emphysema,NA,2003,15-24,492
+Asthma,302,2003,15-24,493
+"Renal failure, nephritis",28,2003,15-24,580-589
+Diseases of the heart (CVD),139,2003,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,1166,2003,25-44,480-487
+Chronic bronchitis ,70,2003,25-44,491
+Emphysema,10,2003,25-44,492
+Asthma,1060,2003,25-44,493
+"Renal failure, nephritis",228,2003,25-44,580-589
+Diseases of the heart (CVD),2128,2003,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2408,2003,45-64,480-487
+Chronic bronchitis ,1024,2003,45-64,491
+Emphysema,36,2003,45-64,492
+Asthma,1070,2003,45-64,493
+"Renal failure, nephritis",619,2003,45-64,580-589
+Diseases of the heart (CVD),11984,2003,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,9331,2003,65+,480-487
+Chronic bronchitis ,3179,2003,65+,491
+Emphysema,62,2003,65+,492
+Asthma,841,2003,65+,493
+"Renal failure, nephritis",2179,2003,65+,580-589
+Diseases of the heart (CVD),30307,2003,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,777,2004,0-4,480-487
+Chronic bronchitis ,0,2004,0-4,491
+Emphysema,0,2004,0-4,492
+Asthma,701,2004,0-4,493
+"Renal failure, nephritis",9,2004,0-4,580-589
+Diseases of the heart (CVD),43,2004,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,321,2004,5- 14,480-487
+Chronic bronchitis ,0,2004,5- 14,491
+Emphysema,NA,2004,5- 14,492
+Asthma,671,2004,5- 14,493
+"Renal failure, nephritis",31,2004,5- 14,580-589
+Diseases of the heart (CVD),38,2004,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,158,2004,15-24,480-487
+Chronic bronchitis ,NA,2004,15-24,491
+Emphysema,6,2004,15-24,492
+Asthma,249,2004,15-24,493
+"Renal failure, nephritis",31,2004,15-24,580-589
+Diseases of the heart (CVD),196,2004,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,872,2004,25-44,480-487
+Chronic bronchitis ,82,2004,25-44,491
+Emphysema,9,2004,25-44,492
+Asthma,873,2004,25-44,493
+"Renal failure, nephritis",211,2004,25-44,580-589
+Diseases of the heart (CVD),2127,2004,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2472,2004,45-64,480-487
+Chronic bronchitis ,987,2004,45-64,491
+Emphysema,20,2004,45-64,492
+Asthma,1014,2004,45-64,493
+"Renal failure, nephritis",841,2004,45-64,580-589
+Diseases of the heart (CVD),11807,2004,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,9062,2004,65+,480-487
+Chronic bronchitis ,3174,2004,65+,491
+Emphysema,39,2004,65+,492
+Asthma,861,2004,65+,493
+"Renal failure, nephritis",2610,2004,65+,580-589
+Diseases of the heart (CVD),30320,2004,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,918,2005,0-4,480-487
+Chronic bronchitis ,NA,2005,0-4,491
+Emphysema,0,2005,0-4,492
+Asthma,676,2005,0-4,493
+"Renal failure, nephritis",19,2005,0-4,580-589
+Diseases of the heart (CVD),43,2005,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,315,2005,5- 14,480-487
+Chronic bronchitis ,0,2005,5- 14,491
+Emphysema,NA,2005,5- 14,492
+Asthma,609,2005,5- 14,493
+"Renal failure, nephritis",15,2005,5- 14,580-589
+Diseases of the heart (CVD),36,2005,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,198,2005,15-24,480-487
+Chronic bronchitis ,NA,2005,15-24,491
+Emphysema,8,2005,15-24,492
+Asthma,236,2005,15-24,493
+"Renal failure, nephritis",43,2005,15-24,580-589
+Diseases of the heart (CVD),168,2005,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,933,2005,25-44,480-487
+Chronic bronchitis ,70,2005,25-44,491
+Emphysema,10,2005,25-44,492
+Asthma,907,2005,25-44,493
+"Renal failure, nephritis",290,2005,25-44,580-589
+Diseases of the heart (CVD),2056,2005,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2576,2005,45-64,480-487
+Chronic bronchitis ,1141,2005,45-64,491
+Emphysema,29,2005,45-64,492
+Asthma,1156,2005,45-64,493
+"Renal failure, nephritis",939,2005,45-64,580-589
+Diseases of the heart (CVD),11447,2005,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,9786,2005,65+,480-487
+Chronic bronchitis ,3501,2005,65+,491
+Emphysema,42,2005,65+,492
+Asthma,1005,2005,65+,493
+"Renal failure, nephritis",3259,2005,65+,580-589
+Diseases of the heart (CVD),28933,2005,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,809,2006,0-4,480-487
+Chronic bronchitis ,0,2006,0-4,491
+Emphysema,0,2006,0-4,492
+Asthma,777,2006,0-4,493
+"Renal failure, nephritis",15,2006,0-4,580-589
+Diseases of the heart (CVD),34,2006,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,339,2006,5- 14,480-487
+Chronic bronchitis ,NA,2006,5- 14,491
+Emphysema,0,2006,5- 14,492
+Asthma,677,2006,5- 14,493
+"Renal failure, nephritis",36,2006,5- 14,580-589
+Diseases of the heart (CVD),45,2006,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,176,2006,15-24,480-487
+Chronic bronchitis ,NA,2006,15-24,491
+Emphysema,NA,2006,15-24,492
+Asthma,282,2006,15-24,493
+"Renal failure, nephritis",41,2006,15-24,580-589
+Diseases of the heart (CVD),176,2006,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,910,2006,25-44,480-487
+Chronic bronchitis ,62,2006,25-44,491
+Emphysema,11,2006,25-44,492
+Asthma,984,2006,25-44,493
+"Renal failure, nephritis",319,2006,25-44,580-589
+Diseases of the heart (CVD),2042,2006,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2562,2006,45-64,480-487
+Chronic bronchitis ,1149,2006,45-64,491
+Emphysema,17,2006,45-64,492
+Asthma,1185,2006,45-64,493
+"Renal failure, nephritis",1059,2006,45-64,580-589
+Diseases of the heart (CVD),11456,2006,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,8756,2006,65+,480-487
+Chronic bronchitis ,3356,2006,65+,491
+Emphysema,36,2006,65+,492
+Asthma,922,2006,65+,493
+"Renal failure, nephritis",3750,2006,65+,580-589
+Diseases of the heart (CVD),28372,2006,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,723,2007,0-4,480-487
+Chronic bronchitis ,NA,2007,0-4,491
+Emphysema,0,2007,0-4,492
+Asthma,768,2007,0-4,493
+"Renal failure, nephritis",21,2007,0-4,580-589
+Diseases of the heart (CVD),45,2007,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,316,2007,5- 14,480-487
+Chronic bronchitis ,NA,2007,5- 14,491
+Emphysema,NA,2007,5- 14,492
+Asthma,587,2007,5- 14,493
+"Renal failure, nephritis",26,2007,5- 14,580-589
+Diseases of the heart (CVD),32,2007,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,188,2007,15-24,480-487
+Chronic bronchitis ,NA,2007,15-24,491
+Emphysema,6,2007,15-24,492
+Asthma,291,2007,15-24,493
+"Renal failure, nephritis",55,2007,15-24,580-589
+Diseases of the heart (CVD),170,2007,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,875,2007,25-44,480-487
+Chronic bronchitis ,75,2007,25-44,491
+Emphysema,7,2007,25-44,492
+Asthma,848,2007,25-44,493
+"Renal failure, nephritis",337,2007,25-44,580-589
+Diseases of the heart (CVD),1900,2007,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2576,2007,45-64,480-487
+Chronic bronchitis ,1216,2007,45-64,491
+Emphysema,9,2007,45-64,492
+Asthma,1296,2007,45-64,493
+"Renal failure, nephritis",1157,2007,45-64,580-589
+Diseases of the heart (CVD),11151,2007,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,8002,2007,65+,480-487
+Chronic bronchitis ,3396,2007,65+,491
+Emphysema,50,2007,65+,492
+Asthma,989,2007,65+,493
+"Renal failure, nephritis",4067,2007,65+,580-589
+Diseases of the heart (CVD),27981,2007,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,695,2008,0-4,480-487
+Chronic bronchitis ,0,2008,0-4,491
+Emphysema,NA,2008,0-4,492
+Asthma,703,2008,0-4,493
+"Renal failure, nephritis",14,2008,0-4,580-589
+Diseases of the heart (CVD),35,2008,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,308,2008,5- 14,480-487
+Chronic bronchitis ,0,2008,5- 14,491
+Emphysema,NA,2008,5- 14,492
+Asthma,527,2008,5- 14,493
+"Renal failure, nephritis",23,2008,5- 14,580-589
+Diseases of the heart (CVD),46,2008,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,190,2008,15-24,480-487
+Chronic bronchitis ,0,2008,15-24,491
+Emphysema,7,2008,15-24,492
+Asthma,287,2008,15-24,493
+"Renal failure, nephritis",53,2008,15-24,580-589
+Diseases of the heart (CVD),183,2008,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,793,2008,25-44,480-487
+Chronic bronchitis ,70,2008,25-44,491
+Emphysema,11,2008,25-44,492
+Asthma,824,2008,25-44,493
+"Renal failure, nephritis",294,2008,25-44,580-589
+Diseases of the heart (CVD),1891,2008,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2280,2008,45-64,480-487
+Chronic bronchitis ,1534,2008,45-64,491
+Emphysema,18,2008,45-64,492
+Asthma,1387,2008,45-64,493
+"Renal failure, nephritis",1251,2008,45-64,580-589
+Diseases of the heart (CVD),11317,2008,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,7380,2008,65+,480-487
+Chronic bronchitis ,4244,2008,65+,491
+Emphysema,34,2008,65+,492
+Asthma,1081,2008,65+,493
+"Renal failure, nephritis",4089,2008,65+,580-589
+Diseases of the heart (CVD),28206,2008,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,868,2009,0-4,480-487
+Chronic bronchitis ,NA,2009,0-4,491
+Emphysema,0,2009,0-4,492
+Asthma,717,2009,0-4,493
+"Renal failure, nephritis",NA,2009,0-4,580-589
+Diseases of the heart (CVD),34,2009,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,493,2009,5- 14,480-487
+Chronic bronchitis ,0,2009,5- 14,491
+Emphysema,0,2009,5- 14,492
+Asthma,680,2009,5- 14,493
+"Renal failure, nephritis",23,2009,5- 14,580-589
+Diseases of the heart (CVD),46,2009,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,277,2009,15-24,480-487
+Chronic bronchitis ,NA,2009,15-24,491
+Emphysema,9,2009,15-24,492
+Asthma,302,2009,15-24,493
+"Renal failure, nephritis",55,2009,15-24,580-589
+Diseases of the heart (CVD),189,2009,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,954,2009,25-44,480-487
+Chronic bronchitis ,83,2009,25-44,491
+Emphysema,9,2009,25-44,492
+Asthma,957,2009,25-44,493
+"Renal failure, nephritis",251,2009,25-44,580-589
+Diseases of the heart (CVD),1883,2009,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2535,2009,45-64,480-487
+Chronic bronchitis ,1663,2009,45-64,491
+Emphysema,23,2009,45-64,492
+Asthma,1450,2009,45-64,493
+"Renal failure, nephritis",1121,2009,45-64,580-589
+Diseases of the heart (CVD),10902,2009,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,7022,2009,65+,480-487
+Chronic bronchitis ,4196,2009,65+,491
+Emphysema,34,2009,65+,492
+Asthma,1086,2009,65+,493
+"Renal failure, nephritis",3422,2009,65+,580-589
+Diseases of the heart (CVD),27430,2009,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,676,2010,0-4,480-487
+Chronic bronchitis ,0,2010,0-4,491
+Emphysema,0,2010,0-4,492
+Asthma,679,2010,0-4,493
+"Renal failure, nephritis",8,2010,0-4,580-589
+Diseases of the heart (CVD),27,2010,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,253,2010,5- 14,480-487
+Chronic bronchitis ,0,2010,5- 14,491
+Emphysema,0,2010,5- 14,492
+Asthma,500,2010,5- 14,493
+"Renal failure, nephritis",23,2010,5- 14,580-589
+Diseases of the heart (CVD),39,2010,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,155,2010,15-24,480-487
+Chronic bronchitis ,NA,2010,15-24,491
+Emphysema,NA,2010,15-24,492
+Asthma,241,2010,15-24,493
+"Renal failure, nephritis",53,2010,15-24,580-589
+Diseases of the heart (CVD),181,2010,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,664,2010,25-44,480-487
+Chronic bronchitis ,90,2010,25-44,491
+Emphysema,10,2010,25-44,492
+Asthma,821,2010,25-44,493
+"Renal failure, nephritis",301,2010,25-44,580-589
+Diseases of the heart (CVD),1798,2010,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2207,2010,45-64,480-487
+Chronic bronchitis ,1618,2010,45-64,491
+Emphysema,22,2010,45-64,492
+Asthma,1350,2010,45-64,493
+"Renal failure, nephritis",1210,2010,45-64,580-589
+Diseases of the heart (CVD),10771,2010,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,6663,2010,65+,480-487
+Chronic bronchitis ,4079,2010,65+,491
+Emphysema,19,2010,65+,492
+Asthma,967,2010,65+,493
+"Renal failure, nephritis",3600,2010,65+,580-589
+Diseases of the heart (CVD),27359,2010,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,594,2011,0-4,480-487
+Chronic bronchitis ,NA,2011,0-4,491
+Emphysema,0,2011,0-4,492
+Asthma,667,2011,0-4,493
+"Renal failure, nephritis",23,2011,0-4,580-589
+Diseases of the heart (CVD),47,2011,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,326,2011,5- 14,480-487
+Chronic bronchitis ,0,2011,5- 14,491
+Emphysema,0,2011,5- 14,492
+Asthma,560,2011,5- 14,493
+"Renal failure, nephritis",11,2011,5- 14,580-589
+Diseases of the heart (CVD),35,2011,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,172,2011,15-24,480-487
+Chronic bronchitis ,NA,2011,15-24,491
+Emphysema,NA,2011,15-24,492
+Asthma,236,2011,15-24,493
+"Renal failure, nephritis",51,2011,15-24,580-589
+Diseases of the heart (CVD),225,2011,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,772,2011,25-44,480-487
+Chronic bronchitis ,79,2011,25-44,491
+Emphysema,8,2011,25-44,492
+Asthma,701,2011,25-44,493
+"Renal failure, nephritis",330,2011,25-44,580-589
+Diseases of the heart (CVD),1762,2011,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2477,2011,45-64,480-487
+Chronic bronchitis ,1711,2011,45-64,491
+Emphysema,22,2011,45-64,492
+Asthma,1345,2011,45-64,493
+"Renal failure, nephritis",1483,2011,45-64,580-589
+Diseases of the heart (CVD),10442,2011,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,7559,2011,65+,480-487
+Chronic bronchitis ,4239,2011,65+,491
+Emphysema,28,2011,65+,492
+Asthma,983,2011,65+,493
+"Renal failure, nephritis",4302,2011,65+,580-589
+Diseases of the heart (CVD),25384,2011,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,569,2012,0-4,480-487
+Chronic bronchitis ,0,2012,0-4,491
+Emphysema,NA,2012,0-4,492
+Asthma,658,2012,0-4,493
+"Renal failure, nephritis",51,2012,0-4,580-589
+Diseases of the heart (CVD),27,2012,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,284,2012,5- 14,480-487
+Chronic bronchitis ,0,2012,5- 14,491
+Emphysema,0,2012,5- 14,492
+Asthma,555,2012,5- 14,493
+"Renal failure, nephritis",12,2012,5- 14,580-589
+Diseases of the heart (CVD),40,2012,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,156,2012,15-24,480-487
+Chronic bronchitis ,NA,2012,15-24,491
+Emphysema,NA,2012,15-24,492
+Asthma,220,2012,15-24,493
+"Renal failure, nephritis",63,2012,15-24,580-589
+Diseases of the heart (CVD),193,2012,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,700,2012,25-44,480-487
+Chronic bronchitis ,93,2012,25-44,491
+Emphysema,11,2012,25-44,492
+Asthma,697,2012,25-44,493
+"Renal failure, nephritis",307,2012,25-44,580-589
+Diseases of the heart (CVD),1618,2012,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2296,2012,45-64,480-487
+Chronic bronchitis ,1834,2012,45-64,491
+Emphysema,23,2012,45-64,492
+Asthma,1327,2012,45-64,493
+"Renal failure, nephritis",1403,2012,45-64,580-589
+Diseases of the heart (CVD),10145,2012,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,6933,2012,65+,480-487
+Chronic bronchitis ,4090,2012,65+,491
+Emphysema,37,2012,65+,492
+Asthma,952,2012,65+,493
+"Renal failure, nephritis",4116,2012,65+,580-589
+Diseases of the heart (CVD),25222,2012,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,477,2013,0-4,480-487
+Chronic bronchitis ,NA,2013,0-4,491
+Emphysema,NA,2013,0-4,492
+Asthma,564,2013,0-4,493
+"Renal failure, nephritis",7,2013,0-4,580-589
+Diseases of the heart (CVD),19,2013,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,219,2013,5- 14,480-487
+Chronic bronchitis ,NA,2013,5- 14,491
+Emphysema,NA,2013,5- 14,492
+Asthma,520,2013,5- 14,493
+"Renal failure, nephritis",27,2013,5- 14,580-589
+Diseases of the heart (CVD),48,2013,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,132,2013,15-24,480-487
+Chronic bronchitis ,NA,2013,15-24,491
+Emphysema,10,2013,15-24,492
+Asthma,179,2013,15-24,493
+"Renal failure, nephritis",59,2013,15-24,580-589
+Diseases of the heart (CVD),213,2013,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,589,2013,25-44,480-487
+Chronic bronchitis ,88,2013,25-44,491
+Emphysema,NA,2013,25-44,492
+Asthma,666,2013,25-44,493
+"Renal failure, nephritis",331,2013,25-44,580-589
+Diseases of the heart (CVD),1576,2013,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2211,2013,45-64,480-487
+Chronic bronchitis ,1764,2013,45-64,491
+Emphysema,14,2013,45-64,492
+Asthma,1307,2013,45-64,493
+"Renal failure, nephritis",1542,2013,45-64,580-589
+Diseases of the heart (CVD),9675,2013,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,6925,2013,65+,480-487
+Chronic bronchitis ,4047,2013,65+,491
+Emphysema,34,2013,65+,492
+Asthma,892,2013,65+,493
+"Renal failure, nephritis",4238,2013,65+,580-589
+Diseases of the heart (CVD),24441,2013,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,349,2014,0-4,480-487
+Chronic bronchitis ,NA,2014,0-4,491
+Emphysema,NA,2014,0-4,492
+Asthma,501,2014,0-4,493
+"Renal failure, nephritis",8,2014,0-4,580-589
+Diseases of the heart (CVD),29,2014,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,190,2014,5- 14,480-487
+Chronic bronchitis ,NA,2014,5- 14,491
+Emphysema,NA,2014,5- 14,492
+Asthma,526,2014,5- 14,493
+"Renal failure, nephritis",35,2014,5- 14,580-589
+Diseases of the heart (CVD),34,2014,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,149,2014,15-24,480-487
+Chronic bronchitis ,NA,2014,15-24,491
+Emphysema,7,2014,15-24,492
+Asthma,190,2014,15-24,493
+"Renal failure, nephritis",55,2014,15-24,580-589
+Diseases of the heart (CVD),158,2014,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,576,2014,25-44,480-487
+Chronic bronchitis ,63,2014,25-44,491
+Emphysema,10,2014,25-44,492
+Asthma,736,2014,25-44,493
+"Renal failure, nephritis",318,2014,25-44,580-589
+Diseases of the heart (CVD),1371,2014,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,2134,2014,45-64,480-487
+Chronic bronchitis ,1762,2014,45-64,491
+Emphysema,19,2014,45-64,492
+Asthma,1395,2014,45-64,493
+"Renal failure, nephritis",1739,2014,45-64,580-589
+Diseases of the heart (CVD),9184,2014,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,5892,2014,65+,480-487
+Chronic bronchitis ,3889,2014,65+,491
+Emphysema,19,2014,65+,492
+Asthma,882,2014,65+,493
+"Renal failure, nephritis",4529,2014,65+,580-589
+Diseases of the heart (CVD),24329,2014,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,222,2015,0-4,480-487
+Chronic bronchitis ,NA,2015,0-4,491
+Emphysema,0,2015,0-4,492
+Asthma,258,2015,0-4,493
+"Renal failure, nephritis",9,2015,0-4,580-589
+Diseases of the heart (CVD),15,2015,0-4,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,155,2015,5- 14,480-487
+Chronic bronchitis ,0,2015,5- 14,491
+Emphysema,0,2015,5- 14,492
+Asthma,278,2015,5- 14,493
+"Renal failure, nephritis",31,2015,5- 14,580-589
+Diseases of the heart (CVD),21,2015,5- 14,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,107,2015,15-24,480-487
+Chronic bronchitis ,NA,2015,15-24,491
+Emphysema,NA,2015,15-24,492
+Asthma,124,2015,15-24,493
+"Renal failure, nephritis",44,2015,15-24,580-589
+Diseases of the heart (CVD),113,2015,15-24,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,332,2015,25-44,480-487
+Chronic bronchitis ,39,2015,25-44,491
+Emphysema,NA,2015,25-44,492
+Asthma,469,2015,25-44,493
+"Renal failure, nephritis",287,2015,25-44,580-589
+Diseases of the heart (CVD),938,2015,25-44,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,1546,2015,45-64,480-487
+Chronic bronchitis ,1230,2015,45-64,491
+Emphysema,19,2015,45-64,492
+Asthma,1003,2015,45-64,493
+"Renal failure, nephritis",1284,2015,45-64,580-589
+Diseases of the heart (CVD),6579,2015,45-64,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
+Pneumonia & influenza ,4858,2015,65+,480-487
+Chronic bronchitis ,3004,2015,65+,491
+Emphysema,17,2015,65+,492
+Asthma,833,2015,65+,493
+"Renal failure, nephritis",3563,2015,65+,580-589
+Diseases of the heart (CVD),18178,2015,65+,"391-392.0, 393-398, 402, 404, 410-416, 420-429"
