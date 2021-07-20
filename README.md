@@ -1,0 +1,2 @@
+# Science-Research-Capstone
+Used R programming to analyse temperature, ozone, PM 2.5, and annual hospitalization data in Connecticut. The analyses and visualizations created helped me answer the driving question, "What are the effects of increasing temperatures on patients diagnosed with respiratory conditions and hospitalizations in Connecticut and what are some ways to address the existing issues?"
